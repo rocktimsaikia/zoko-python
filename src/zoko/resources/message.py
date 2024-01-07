@@ -1,6 +1,6 @@
 import requests
 from zoko.constants import endpoint
-from typing import Literal, TypedDict
+from typing import Literal, TypedDict, List
 
 
 # Parameter types
@@ -45,15 +45,15 @@ class WhatsappContactsPhone(TypedDict):
 
 
 class WhatsappContacts(TypedDict):
-    addresses: list[WhatsappContactAddress]
-    emails: list[WhatsappContactsEmail]
+    addresses: List[WhatsappContactAddress]
+    emails: List[WhatsappContactsEmail]
     name: WhatsappContactName
     org: WhatsappContactOrg
-    phones: list[WhatsappContactsPhone]
+    phones: List[WhatsappContactsPhone]
 
 
 class Conatct(TypedDict):
-    whatsappContacts: list[WhatsappContacts]
+    whatsappContacts: List[WhatsappContacts]
 
 
 TemplateType = Literal[
@@ -87,17 +87,48 @@ class Message:
         assign: Assign,
         message: str,
         caption: str,
+        contacts: Conatct,
         send_to: str,
         template_id: str,
         template_args: list[str],
         template_type: TemplateType,
         template_language: str,
     ) -> SendMessageResponse:
+        """
+        Send message to customer on a specific channel.
+
+        Parameters
+        ----------
+        assign
+            Assign the chat to a specific agent.
+        message
+            Content of the message.
+        caption
+            Describe of the specified "image", "video" or "document" media except for "audio".
+        contacts
+            Contacts array for message type contacts.
+        send_to
+            E.164 formatted whatsapp number without the leading "+" sign.
+        template_id
+            Template ID to be used.
+        template_args
+            Template placeholder values in the same order as in the template.
+        template_type
+            The type of the template.
+        template_language
+            The language of the template.
+
+        Returns
+        -------
+        SendMessageResponse
+            The response object with the message ID and status.
+        """
         payload = {
             "assign": assign,
             "channel": "whatsapp",
             "message": message,
             "caption": caption,
+            "contacts": contacts,
             "recipient": send_to,
             "templateId": template_id,
             "templateArgs": template_args,

@@ -1,6 +1,6 @@
 import requests
 from zoko.constants import endpoint
-from typing import TypedDict
+from typing import TypedDict, List
 
 
 class Template(TypedDict):
@@ -19,13 +19,13 @@ class Account:
         self.__headers = __headers
         pass
 
-    def get_all_templates(self) -> list[Template]:
+    def get_all_templates(self) -> List[Template]:
         """
         Returns all the templates for the account.
 
         Returns
         -------
-        list[dict]
+        list[Template]
             List of all the available templates for the account.
         """
         response = requests.request(
@@ -42,7 +42,7 @@ class Account:
 
         Parameters
         ----------
-        template_id : str
+        template_id
             The ID of the template to be fetched.
 
         Returns
