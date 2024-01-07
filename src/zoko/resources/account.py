@@ -1,5 +1,17 @@
 import requests
 from zoko.constants import endpoint
+from typing import TypedDict
+
+
+class Template(TypedDict):
+    active: bool
+    channel: str
+    isRichTemplate: bool
+    templateDesc: str
+    templateId: str
+    templateLanguage: str
+    templateType: str
+    templateVariableCount: int
 
 
 class Account:
@@ -7,7 +19,15 @@ class Account:
         self.__headers = __headers
         pass
 
-    def get_all_templates(self):
+    def get_all_templates(self) -> list[Template]:
+        """
+        Returns all the templates for the account.
+
+        Returns
+        -------
+        list[dict]
+            List of all the available templates for the account.
+        """
         response = requests.request(
             "GET",
             endpoint.AccountEndpoint.TEMPLATES,
@@ -16,7 +36,27 @@ class Account:
         response_json = response.json()
         return response_json
 
-    def get_template_by_id(self, template_id: str):
+    def get_template_by_id(self, template_id: str) -> Template:
+        """
+        Get the template by ID.
+
+        Parameters
+        ----------
+        template_id : str
+            The ID of the template to be fetched.
+
+        Returns
+        -------
+        Template
+            The template object with the given ID.
+
+        Raises
+        ------
+        ValueError:
+            Raised when the template ID is not provided.
+        ValueError:
+            Raised when the template ID is invalid or not found.
+        """
         if template_id is None:
             raise ValueError("Template ID is required")
 
@@ -27,4 +67,6 @@ class Account:
             if template["templateId"] == template_id
         ]
         current_template = current_template[0]
-        return current_template or None
+        if current_template is None:
+            raise ValueError("Template ID is invalid")
+        return current_template
