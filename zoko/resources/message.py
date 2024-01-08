@@ -1,6 +1,6 @@
 import requests
-from zoko.constants import endpoint
-from typing import Literal, TypedDict, List
+from zoko.constants.endpoint import MessageEndpoint
+from typing import Literal, TypedDict, List, Optional
 
 
 # Parameter types
@@ -52,7 +52,7 @@ class WhatsappContacts(TypedDict):
     phones: List[WhatsappContactsPhone]
 
 
-class Conatct(TypedDict):
+class Contact(TypedDict):
     whatsappContacts: List[WhatsappContacts]
 
 
@@ -84,30 +84,30 @@ class Message:
 
     def send_message(
         self,
-        assign: Assign,
         message: str,
-        caption: str,
-        contacts: Conatct,
-        send_to: str,
+        recipient: str,
         template_id: str,
         template_args: list[str],
         template_type: TemplateType,
-        template_language: str,
+        template_language: str = "en",
+        assign: Optional[Assign] = None,
+        caption: Optional[str] = None,
+        contacts: Optional[Contact] = None,
     ) -> SendMessageResponse:
         """
         Send message to customer on a specific channel.
 
         Parameters
         ----------
-        assign
+        assign (optional)
             Assign the chat to a specific agent.
         message
             Content of the message.
-        caption
+        caption (optional)
             Describe of the specified "image", "video" or "document" media except for "audio".
-        contacts
+        contacts (optional)
             Contacts array for message type contacts.
-        send_to
+        recipient
             E.164 formatted whatsapp number without the leading "+" sign.
         template_id
             Template ID to be used.
@@ -129,7 +129,7 @@ class Message:
             "message": message,
             "caption": caption,
             "contacts": contacts,
-            "recipient": send_to,
+            "recipient": recipient,
             "templateId": template_id,
             "templateArgs": template_args,
             "templateLanguage": template_language,
@@ -137,7 +137,7 @@ class Message:
         }
         response = requests.request(
             "POST",
-            endpoint.MessageEndpoint.SEND,
+            MessageEndpoint.SEND,
             headers=self.header,
             json=payload,
         )

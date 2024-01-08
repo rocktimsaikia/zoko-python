@@ -5,7 +5,7 @@ import httpretty
 import json
 
 
-class TestZokoClient(unittest.TestCase):
+class TestZokoClientAccount(unittest.TestCase):
     def setUp(self):
         self.zoko = ZokoClient(api_key="test_api_key")
         httpretty.enable(verbose=True, allow_net_connect=False)
