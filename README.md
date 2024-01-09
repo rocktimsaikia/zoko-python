@@ -10,6 +10,8 @@ A Python library for interacting with the [Zoko](https://www.zoko.io/) APIs.
 **Table of Contents**
 
 - [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Documentation](#documentation)
 - [License](#license)
 
 ## Installation
@@ -17,6 +19,41 @@ A Python library for interacting with the [Zoko](https://www.zoko.io/) APIs.
 ```console
 pip install zoko
 ```
+
+
+## Quickstart
+
+```python
+from zoko import ZokoClient
+
+# Initialize the client with your Zoko API key
+zoko = ZokoClient(api_key='YOUR_API_KEY')
+
+# Get all all templates
+templates = zoko.account.get_all_templates()
+
+print(templates)
+```
+
+Expected output:
+
+```python
+[
+  {
+    "active": True,
+    "channel": "whatsapp",
+    "isRichTemplate": True,
+    "templateDesc": "Good morning {{1}}. How may I help you today?",
+    "templateId": "greeting_01",
+    "templateLanguage": "en",
+    "templateType": "buttonTemplate",
+    "templateVariableCount": 1
+  }
+]
+```
+
+## Documentation
+You can find the documentation for the all the available resource and method examples [here](./examples).
 
 ## License
 
