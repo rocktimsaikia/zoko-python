@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
     strategy:
       fail-fast: false
       matrix:
@@ -38,17 +41,13 @@ jobs:
       run: |
         python -m unittest -v
 
+    # retrieve your distributions here
+    - name: Install dependencies
+      run: python3 -m pip install build
+    - name: Generate dist
+      run: python3 -m build --wheel
 
-    - name: upload release to PyPI
-      permissions:
-        # IMPORTANT: this permission is mandatory for trusted publishing
-        id-token: write
-      steps:
-        # retrieve your distributions here
-        - name: Generate dist
-          run: python3 -m build --wheel
-
-        - name: Publish package distributions to PyPI
-          uses: pypa/gh-action-pypi-publish@release/v1
-          with:
-            repository-url: https://test.pypi.org/legacy/
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
