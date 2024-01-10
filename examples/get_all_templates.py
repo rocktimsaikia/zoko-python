@@ -1,8 +1,16 @@
 # Get all templates from your Zoko account
 import os
+
+from dotenv import load_dotenv
+
 from zoko import ZokoClient
 
-ZOKO_API_KEY = os.environ["ZOKO_API_KEY"]
+load_dotenv()
+
+
+ZOKO_API_KEY = os.environ.get("ZOKO_API_KEY")
+
+print("ZOKO_API_KEY", ZOKO_API_KEY)
 
 
 def main():

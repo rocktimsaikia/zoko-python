@@ -1,2 +1,6 @@
 httpretty==1.1.4
 requests==2.31.0
+build==1.0.3
+httpretty==1.1.4
+python-dotenv==1.0.0
+-e git+ssh://git@github.com/rocktimsaikia/zoko-python.git@60ee63516c9535440403ca5b541404a72c513008#egg=zoko
