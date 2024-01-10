@@ -70,3 +70,48 @@ class TestZokoClientAccount(unittest.TestCase):
         )
         response = self.zoko.account.get_template_by_id(template_id="greeting_01")
         self.assertEqual(response, expected_response[0])
+
+    def test_get_templates_by_type(self):
+        expected_response = [
+            {
+                "active": True,
+                "channel": "whatsapp",
+                "isRichTemplate": False,
+                "templateDesc": "Good morning {{1}}. How may I help you today?",
+                "templateId": "greeting_01",
+                "templateLanguage": "en",
+                "templateType": "buttonTemplate",
+                "templateVariableCount": 1,
+            },
+            {
+                "active": True,
+                "channel": "whatsapp",
+                "isRichTemplate": False,
+                "templateDesc": "Good morning {{1}}. How may I help you today?",
+                "templateId": "greeting_01",
+                "templateLanguage": "en",
+                "templateType": "buttonTemplate",
+                "templateVariableCount": 1,
+            },
+            {
+                "active": True,
+                "channel": "whatsapp",
+                "isRichTemplate": True,
+                "templateDesc": "Good evening {{1}}. How may I help you today?",
+                "templateId": "greeting_02",
+                "templateLanguage": "en",
+                "templateType": "richTemplate",
+                "templateVariableCount": 1,
+            },
+        ]
+        httpretty.register_uri(
+            httpretty.GET,
+            AccountEndpoint.TEMPLATES,
+            body=json.dumps(expected_response),
+            content_type="application/json",
+        )
+        response = self.zoko.account.get_templates_by_type("buttonTemplate")
+        self.assertEqual(len(response), 2)
+        self.assertEqual(response, expected_response[:2])
+        self.assertEqual(response[0]["templateType"], "buttonTemplate")
+        self.assertEqual(response[1]["templateType"], "buttonTemplate")
