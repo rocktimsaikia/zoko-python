@@ -2,6 +2,8 @@ import requests
 from zoko.constants import endpoint
 from typing import TypedDict, List
 
+from zoko.types.common import TemplateType
+
 
 class Template(TypedDict):
     active: bool
@@ -70,3 +72,48 @@ class Account:
         if current_template is None:
             raise ValueError("Template ID is invalid")
         return current_template
+
+    def get_templates_by_type(self, template_type: TemplateType) -> List[Template]:
+        """
+        Get the templates by type.
+
+        Parameters
+        ----------
+        template_type
+            The type of the template to be fetched. Must be one of the following:
+                - text
+                - image
+                - document
+                - audio
+                - video
+                - location
+                - sticker
+                - contacts
+                - template
+                - richTemplate
+                - buttonTemplate
+
+        Returns
+        -------
+        List[Template]
+            List of templates with the given type.
+
+        Raises
+        ------
+        ValueError:
+            Raised when the template type is not provided.
+        ValueError:
+            Raised when the template type is invalid or not found.
+        """
+        if template_type is None:
+            raise ValueError("Template type is required")
+
+        all_templates = self.get_all_templates()
+        templates_filtered = [
+            template
+            for template in all_templates
+            if template["templateType"] == template_type
+        ]
+        if templates_filtered is None:
+            raise ValueError("Template type is invalid")
+        return templates_filtered

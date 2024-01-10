@@ -1,6 +1,8 @@
 import requests
 from zoko.constants.endpoint import MessageEndpoint
-from typing import Literal, TypedDict, List, Optional
+from typing import TypedDict, List, Optional
+
+from zoko.types.common import TemplateType
 
 
 # Parameter types
@@ -54,21 +56,6 @@ class WhatsappContacts(TypedDict):
 
 class Contact(TypedDict):
     whatsappContacts: List[WhatsappContacts]
-
-
-TemplateType = Literal[
-    "text",
-    "image",
-    "document",
-    "audio",
-    "video",
-    "location",
-    "sticker",
-    "contacts",
-    "template",
-    "richTemplate",
-    "buttonTemplate",
-]
 
 
 # Response types
