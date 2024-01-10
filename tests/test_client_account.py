@@ -1,8 +1,10 @@
+import json
 import unittest
+
+import httpretty
+
 from zoko.client import ZokoClient
 from zoko.constants.endpoint import AccountEndpoint
-import httpretty
-import json
 
 
 class TestZokoClientAccount(unittest.TestCase):

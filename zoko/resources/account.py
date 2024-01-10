@@ -1,7 +1,8 @@
-import requests
-from zoko.constants import endpoint
-from typing import TypedDict, List
+from typing import List, TypedDict
 
+import requests
+
+from zoko.constants import endpoint
 from zoko.types.common import TemplateType
 
 
