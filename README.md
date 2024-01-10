@@ -3,7 +3,7 @@
 A Python library for interacting with the [Zoko](https://www.zoko.io/) APIs.
 > :construction: This project is work in progress. The library still has a lot of methods to implement.
 
-[![Python package](https://github.com/rocktimsaikia/zoko-python/actions/workflows/python-package.yml/badge.svg)](https://github.com/rocktimsaikia/zoko-python/actions/workflows/python-package.yml)
+[![Python package](https://github.com/rocktimsaikia/zoko-python/actions/workflows/package-test.yml/badge.svg)](https://github.com/rocktimsaikia/zoko-python/actions/workflows/python-package.yml)
 <!-- [![PyPI - Version](https://img.shields.io/pypi/v/zoko.svg)](https://pypi.org/project/zoko) -->
 <!-- [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/zoko.svg)](https://pypi.org/project/zoko) -->
 
