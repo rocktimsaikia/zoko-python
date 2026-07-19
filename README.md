@@ -15,11 +15,15 @@ pip install zoko
 ## Quickstart
 
 ```python
-from zoko import ZokoClient
+from zoko import ZokoClient, MessageType
 
 zoko = ZokoClient(api_key="YOUR_API_KEY")
 
-zoko.message.send_message(recipient="919998880000", template_type="text", message="Hi")
+zoko.message.send_message(
+    recipient="919998880000",
+    template_type=MessageType.TEXT,
+    message="Hi there! Thanks for reaching out. How can we help you today?",
+)
 ```
 
 ## Resources
