@@ -37,7 +37,18 @@ zoko.webhook   # webhooks
 zoko.group     # WhatsApp groups
 ```
 
-See [examples](./examples) for usage.
+## Usage
+
+Runnable examples covering every method, one file per resource:
+
+| Resource | Examples |
+|----------|----------|
+| account  | [examples/account.py](./examples/account.py)   |
+| message  | [examples/message.py](./examples/message.py)   |
+| customer | [examples/customer.py](./examples/customer.py) |
+| agent    | [examples/agent.py](./examples/agent.py)       |
+| webhook  | [examples/webhook.py](./examples/webhook.py)   |
+| group    | [examples/group.py](./examples/group.py)       |
 
 ## License
 
