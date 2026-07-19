@@ -1,8 +1,7 @@
 from typing import List, TypedDict
 
-import requests
-
 from zoko.constants import endpoint
+from zoko.resources.base import Resource
 from zoko.types.common import TemplateType
 
 
@@ -17,11 +16,7 @@ class Template(TypedDict):
     templateVariableCount: int
 
 
-class Account:
-    def __init__(self, __headers):
-        self.__headers = __headers
-        pass
-
+class Account(Resource):
     def get_all_templates(self) -> List[Template]:
         """
         Returns all the templates for the account.
@@ -31,13 +26,7 @@ class Account:
         list[Template]
             List of all the available templates for the account.
         """
-        response = requests.request(
-            "GET",
-            endpoint.AccountEndpoint.TEMPLATES,
-            headers=self.__headers,
-        )
-        response_json = response.json()
-        return response_json
+        return self._request("GET", endpoint.AccountEndpoint.TEMPLATES)
 
     def get_template_by_id(self, template_id: str) -> Template:
         """
