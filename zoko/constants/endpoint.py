@@ -8,6 +8,7 @@ MESSAGE = ZOKO_API_V2 + "/message"
 CUSTOMER = ZOKO_API_V2 + "/customer"
 AGENT = ZOKO_API_V2 + "/agent"
 WEBHOOK = ZOKO_API_V2 + "/webhook"
+GROUP = ZOKO_API_V2 + "/channels/whatsapp/cloud/group"
 
 
 class AccountEndpoint(object):
@@ -43,14 +44,30 @@ class CustomerEndpoint(object):
 
 class AgentEndpoint(object):
     # Agent
-    LIST = AGENT + "/agents"
     GET = AGENT + "/{agent_id}"
     UPDATE = AGENT + "/{agent_id}"
-    LIST_AGENTS = AGENT + "/teams"
+    LIST_AGENTS = AGENT + "/agents"
+    LIST_TEAMS = AGENT + "/teams"
 
 
-class Webhook(object):
+class WebhookEndpoint(object):
     LIST = WEBHOOK
     CREATE = WEBHOOK
     GET = WEBHOOK + "/{webhook_id}"
     UPDATE = WEBHOOK + "/{webhook_id}"
+    DELETE = WEBHOOK + "/{webhook_id}"
+
+
+class GroupEndpoint(object):
+    CREATE = GROUP
+    LIST = GROUP
+    GET = GROUP + "/{group_id}"
+    UPDATE_SETTINGS = GROUP + "/{group_id}/settings"
+    DELETE = GROUP + "/{group_id}/delete"
+    INVITE = GROUP + "/{group_id}/invitations"
+    REMOVE_PARTICIPANTS = GROUP + "/{group_id}/remove-participants"
+    INVITE_LINK = GROUP + "/{group_id}/invite-link"
+    JOIN_REQUESTS = GROUP + "/{group_id}/join-requests"
+    HANDLE_JOIN_REQUESTS = GROUP + "/{group_id}/join-requests/{action}"
+    AUTO_APPROVAL = GROUP + "/{group_id}/auto-approval"
+    INVITATION_TEMPLATE = GROUP + "/{group_id}/invitation-template"
