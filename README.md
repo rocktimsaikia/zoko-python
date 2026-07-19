@@ -15,16 +15,11 @@ pip install zoko
 ## Quickstart
 
 ```python
-from zoko import ZokoClient, ZokoError
+from zoko import ZokoClient
 
 zoko = ZokoClient(api_key="YOUR_API_KEY")
 
-templates = zoko.account.get_all_templates()
-
-try:
-    zoko.message.send_message(recipient="919998880000", template_type="text", message="Hi")
-except ZokoError as err:
-    print(err.status_code, err.response)
+zoko.message.send_message(recipient="919998880000", template_type="text", message="Hi")
 ```
 
 ## Resources
