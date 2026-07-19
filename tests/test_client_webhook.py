@@ -39,9 +39,7 @@ class TestZokoClientWebhook(unittest.TestCase):
             url="https://x.com", events=["message:user:in"]
         )
         body = json.loads(httpretty.last_request().body)
-        self.assertEqual(
-            body, {"url": "https://x.com", "events": ["message:user:in"]}
-        )
+        self.assertEqual(body, {"url": "https://x.com", "events": ["message:user:in"]})
 
     def test_delete_webhook(self):
         httpretty.register_uri(
@@ -51,7 +49,9 @@ class TestZokoClientWebhook(unittest.TestCase):
             content_type="application/json",
         )
         self.zoko.webhook.delete_webhook(WEBHOOK_ID)
-        self.assertTrue(httpretty.last_request().path.endswith("/webhook/" + WEBHOOK_ID))
+        self.assertTrue(
+            httpretty.last_request().path.endswith("/webhook/" + WEBHOOK_ID)
+        )
 
     def test_create_webhook_requires_events(self):
         with self.assertRaises(ValueError):

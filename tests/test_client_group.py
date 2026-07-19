@@ -19,9 +19,7 @@ class TestZokoClientGroup(unittest.TestCase):
         httpretty.reset()
 
     def test_group_base_path(self):
-        self.assertEqual(
-            GROUP, "https://chat.zoko.io/v2/channels/whatsapp/cloud/group"
-        )
+        self.assertEqual(GROUP, "https://chat.zoko.io/v2/channels/whatsapp/cloud/group")
 
     def test_create_group(self):
         httpretty.register_uri(

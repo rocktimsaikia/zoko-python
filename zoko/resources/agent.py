@@ -24,7 +24,9 @@ class Team(TypedDict):
 
 
 class Agent(Resource):
-    def get_agent(self, agent_id: str, include_teams: Optional[bool] = None) -> AgentDetails:
+    def get_agent(
+        self, agent_id: str, include_teams: Optional[bool] = None
+    ) -> AgentDetails:
         """
         Retrieve agent details.
 

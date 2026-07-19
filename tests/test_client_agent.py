@@ -60,9 +60,7 @@ class TestZokoClientAgent(unittest.TestCase):
         )
         self.zoko.agent.update_agent(AGENT_ID, role="salesman", available=False)
         body = json.loads(httpretty.last_request().body)
-        self.assertEqual(
-            body, {"id": AGENT_ID, "role": "salesman", "available": False}
-        )
+        self.assertEqual(body, {"id": AGENT_ID, "role": "salesman", "available": False})
 
 
 if __name__ == "__main__":

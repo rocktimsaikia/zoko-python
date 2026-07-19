@@ -50,9 +50,7 @@ class TestZokoClientCustomer(unittest.TestCase):
             body=json.dumps({"status": "204"}),
             content_type="application/json",
         )
-        self.zoko.customer.create_property(
-            CUSTOMER_ID, type="text", title="VIP"
-        )
+        self.zoko.customer.create_property(CUSTOMER_ID, type="text", title="VIP")
         body = json.loads(httpretty.last_request().body)
         self.assertEqual(body, {"type": "text", "title": "VIP"})
 
