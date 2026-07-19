@@ -1,4 +1,26 @@
-from typing import Literal
+from enum import Enum
+from typing import Literal, Union
+
+
+class MessageType(str, Enum):
+    """Message types accepted by ``send_message``.
+
+    Members are ``str`` values, so ``MessageType.TEXT`` can be used anywhere the
+    raw ``"text"`` string is expected (it serializes to ``"text"`` on the wire).
+    """
+
+    TEXT = "text"
+    IMAGE = "image"
+    DOCUMENT = "document"
+    AUDIO = "audio"
+    VIDEO = "video"
+    LOCATION = "location"
+    STICKER = "sticker"
+    CONTACTS = "contacts"
+    TEMPLATE = "template"
+    RICH_TEMPLATE = "richTemplate"
+    BUTTON_TEMPLATE = "buttonTemplate"
+
 
 Channel = Literal["whatsapp"]
 
@@ -14,16 +36,20 @@ WebhookEvent = Literal[
 
 JoinRequestAction = Literal["approve", "reject"]
 
-TemplateType = Literal[
-    "text",
-    "image",
-    "document",
-    "audio",
-    "video",
-    "location",
-    "sticker",
-    "contacts",
-    "template",
-    "richTemplate",
-    "buttonTemplate",
+# Kept for type hints; accepts a MessageType member or the raw string.
+TemplateType = Union[
+    MessageType,
+    Literal[
+        "text",
+        "image",
+        "document",
+        "audio",
+        "video",
+        "location",
+        "sticker",
+        "contacts",
+        "template",
+        "richTemplate",
+        "buttonTemplate",
+    ],
 ]

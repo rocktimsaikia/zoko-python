@@ -87,6 +87,24 @@ class TestZokoClientMessage(unittest.TestCase):
         )
         self.assertEqual(httpretty.last_request().headers.get("apikey"), "test_api_key")
 
+    def test_send_message_accepts_message_type_enum(self):
+        from zoko import MessageType
+
+        httpretty.register_uri(
+            httpretty.POST,
+            MessageEndpoint.SEND,
+            body=json.dumps({"status": "202"}),
+            content_type="application/json",
+        )
+        self.zoko.message.send_message(
+            recipient="919998880000",
+            template_type=MessageType.BUTTON_TEMPLATE,
+            template_id="greeting",
+        )
+        sent_body = json.loads(httpretty.last_request().body)
+        # Enum member must serialize to the raw API string, not "MessageType.X".
+        self.assertEqual(sent_body["type"], "buttonTemplate")
+
     def test_error_raises_zoko_error(self):
         from zoko import ZokoError
 
