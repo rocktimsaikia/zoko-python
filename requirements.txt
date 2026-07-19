@@ -1,6 +1,5 @@
 requests==2.31.0
 httpretty==1.1.4
 python-dotenv==1.0.0
-pre-commit==4.3.0
 # httpretty 1.1.4 monkeypatches sockets in a way urllib3>=2 rejects. Pin until httpretty is bumped.
 urllib3<2

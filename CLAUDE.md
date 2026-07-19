@@ -7,13 +7,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-pip install -r requirements.txt   # install deps (requests, httpretty, python-dotenv)
+pip install -r requirements.txt   # install test deps (requests, httpretty, python-dotenv)
+pip install pre-commit            # dev tooling; kept out of requirements.txt (pre-commit 4.x needs py>=3.9, but CI tests 3.8)
+pre-commit install                # activate git hooks (run once after cloning)
 python -m unittest -v             # run all tests
 python -m unittest -v tests.test_client_message.TestZokoClientMessage.test_send_message_success  # single test
 flake8 . --select=E9,F63,F7,F82   # lint (mirrors CI; E9/F-codes fail the build)
+pre-commit run -a                 # run all hooks (black + whitespace/eol) across the repo
 ```
 
-CI (`.github/workflows/test-package.yml`) runs flake8 + unittest on Python 3.9/3.10/3.11 for pushes/PRs to `main`.
+Note: the black hook is pinned to 25.1.0 because it runs under Python 3.9; newer black requires >=3.10.
+
+CI (`.github/workflows/test-package.yml`) runs flake8 + unittest on Python 3.8/3.9/3.10, plus a separate `pre-commit` job, for pushes/PRs to `main`.
 
 ## Architecture
 
