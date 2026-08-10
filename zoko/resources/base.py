@@ -1,12 +1,11 @@
-import requests
-
 from zoko.exceptions import ZokoError
 
 
 class Resource:
     """Base class for API resources. Holds auth headers and sends requests."""
 
-    def __init__(self, headers):
+    def __init__(self, session, headers):
+        self._session = session
         self._headers = headers
 
     @staticmethod
@@ -15,7 +14,7 @@ class Resource:
         return {k: v for k, v in payload.items() if v is not None}
 
     def _request(self, method, url, *, params=None, json=None):
-        response = requests.request(
+        response = self._session.request(
             method,
             url,
             headers=self._headers,

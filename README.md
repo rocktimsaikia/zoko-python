@@ -37,6 +37,16 @@ zoko.webhook   # webhooks
 zoko.group     # WhatsApp groups
 ```
 
+## Retries
+
+Transient failures (connection errors, `429`, `5xx`) can be retried automatically:
+
+```python
+zoko = ZokoClient(api_key="YOUR_API_KEY", max_retries=3, backoff_factor=0.5)
+```
+
+Disabled by default (`max_retries=0`). Applies to every request, POST included.
+
 ## Usage
 
 Runnable examples covering every method, one file per resource:
